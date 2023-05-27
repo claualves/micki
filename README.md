@@ -11,21 +11,22 @@ written in Python.
  * sundials (C library) - Tested with version 4.0. Compile Sundials with the following flags to cmake: -DFCMIX_ENABLE=ON -DCMAKE_C_FLAGS="-fPIC" -DLAPACK_ENABLE=ON -DSUNDIALS_INDEX_SIZE=32
 
 ### Detailed installation instructions:
-#install ASE (which includes numpy as a dependancy) and sympy
-pip3 install --user ase
-pip3 install --user sympy
+#install ASE (which includes numpy as a dependancy) and sympy<br>
+pip3 install --user ase<br>
+pip3 install --user sympy<br>
 
-#install sundials
-wget https://github.com/LLNL/sundials/releases/download/v4.0.2/sundials-4.0.2.tar.gz
-tar zxvf sundials-4.0.2.tar.gz
-cd sundials-4.0.2
-mkdir build
-cd build
-#ensure that MKL is found!
-. /opt/intel/mkl/bin/mklvars.sh intel64
-cmake .. -DFCMIX_ENABLE=ON -DCMAKE_C_FLAGS="-fPIC" -DLAPACK_ENABLE=ON -DSUNDIALS_INDEX_SIZE=32 -DCMAKE_INSTALL_PREFIX=~/sundials
-#make sure MKL BLAS/LAPACK were found!
-make
-make install
+#install sundials<br>
+wget https://github.com/LLNL/sundials/releases/download/v4.0.2/sundials-4.0.2.tar.gz<br>
+tar zxvf sundials-4.0.2.tar.gz<br>
+cd sundials-4.0.2<br>
+mkdir build<br>
+cd build<br>
+#ensure that MKL is found!<br>
+. /opt/intel/mkl/bin/mklvars.sh intel64<br>
+cmake .. -DFCMIX_ENABLE=ON -DCMAKE_C_FLAGS="-fPIC" -DLAPACK_ENABLE=ON -DSUNDIALS_INDEX_SIZE=32 -DCMAKE_INSTALL_PREFIX=~/sundials<br>
+#make sure MKL BLAS/LAPACK were found!<br>
+make<br>
+make install<br>
 
-git clone https://github.com/jrschmidt2/micki.git 
+#fetch Micki itself<br>
+git clone https://github.com/jrschmidt2/micki.git
