@@ -23,7 +23,7 @@ mkdir build<br>
 cd build<br>
 #ensure that MKL is found!<br>
 . /opt/intel/mkl/bin/mklvars.sh intel64<br>
-cmake .. -DFCMIX_ENABLE=ON -DCMAKE_C_FLAGS="-fPIC" -DLAPACK_ENABLE=ON -DSUNDIALS_INDEX_SIZE=32 -DCMAKE_INSTALL_PREFIX=~/sundials<br>
+cmake .. -DFCMIX_ENABLE=ON -DCMAKE_C_FLAGS="-fPIC" -DLAPACK_ENABLE=ON -DSUNDIALS_INDEX_SIZE=32<br>
 #make sure MKL BLAS/LAPACK were found!<br>
 make<br>
 make install<br>
