@@ -3,6 +3,7 @@
 from __future__ import print_function
 
 import os
+import glob
 import tempfile
 import shutil
 import warnings
@@ -883,8 +884,9 @@ class Model(object):
         lapack = "-lmkl_rt"
         if "MICKI_LAPACK" in os.environ:
             lapack = os.environ["MICKI_LAPACK"]
-        os.environ["CFLAGS"] = "-w"
-        f2py.compile(program, modulename=modname,
+        os.environ["CFLAGS"] = "-w -std=c99"
+        output=f2py.compile(program, modulename=modname, verbose=0, 
+                     full_output=1,
                      extra_args='--quiet '
                                 '--f90flags="-Wno-unused-dummy-argument '
                                 '-Wno-unused-variable -Wno-unused-func -w" ' 
@@ -895,8 +897,9 @@ class Model(object):
                                 '-lsundials_sunlinsollapackdense '
                                 '-lsundials_nvecserial ' + lapack + ' ' +
                                 os.path.join(dname, pyfname),
-                     source_fn=os.path.join(dname, fname), verbose=0)
-
+                     source_fn=os.path.join(dname, fname))
+        if output.returncode != 0:
+            print(output.stderr)
         # Delete the temporary directory
         shutil.rmtree(dname)
 
@@ -913,7 +916,8 @@ class Model(object):
         self.ffinalize = solve_ida.finalize
 
         # Delete the module file. We've already imported it, so it's in memory.
-        os.remove(modname + '.so')
+        library=glob.glob(modname + '*.so')[0]
+        os.remove(library)
 
     def _out_array_to_dict(self, U, dU, r):
         Ui = {}
